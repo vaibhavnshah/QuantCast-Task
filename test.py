@@ -2,9 +2,6 @@ import unittest
 import quantcast
 
 class testQuantCastSol(unittest.TestCase):
-	def setUp(self):
-		self.logStore = quantcast.StoreLog()
-
 	def test_addToMap(self):
 		expected = {"2000-01-01":{"SAZuXPGUrfbcn5UA":1}}
 		self.logStore = quantcast.StoreLog()
@@ -13,14 +10,12 @@ class testQuantCastSol(unittest.TestCase):
 
 	def test_processLogFile(self):
 		self.logStore = quantcast.StoreLog()
-		self.logStore.hashmap = {}
 		self.logStore.processLogFile("./logFile.csv")
 		expected = {'2018-12-09': {'AtY0laUfhglK3lC7': 2, 'SAZuXPGUrfbcn5UA': 1, '5UAVanZf6UtGyKVS': 1}, '2018-12-08': {'SAZuXPGUrfbcn5UA': 1, '4sMM2LxV07bPJzwf': 1, 'fbcn5UAVanZf6UtG': 1}, '2018-12-07': {'4sMM2LxV07bPJzwf': 1}}
 		self.assertEqual(self.logStore.hashmap, expected,'StoreLog.processLogFile() failed to execute properly')
 
 	def test_getMaxCookieOnDate(self):
 		self.logStore = quantcast.StoreLog()
-		self.logStore.hashmap = {}
 		self.logStore.processLogFile("./logFile.csv")
 		popularCookie08 = self.logStore.getMaxCookieOnDate("2018-12-08")
 		popularCookie09 = self.logStore.getMaxCookieOnDate("2018-12-09")
