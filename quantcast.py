@@ -28,6 +28,7 @@ class StoreLog:
 			cookie,timestamp = activity.split(",")
 			day = timestamp.split("T")[0] #the date is everything before first T
 			self.addToMap(day, cookie)
+		file.close()
 
 	def getMaxCookieOnDate(self,specifiedDate):
 		maxFreq = 0
